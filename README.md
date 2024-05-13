@@ -1,0 +1,2 @@
+# astrallogic
+Building GenAI app
