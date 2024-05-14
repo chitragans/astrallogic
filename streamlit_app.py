@@ -3,9 +3,9 @@ from langchain import PromptTemplate
 from langchain.llms import OpenAI
 
 prompt = PromptTemplate(
-    input_variables=["tone", "dialect", "email"],
-    #input_variables=["email"],
-    #template=template,
+    #input_variables=["tone", "dialect", "email"],
+    #input_variables=["tone", "email"],
+    template=template,
 )
 
 def load_LLM(openai_api_key):
