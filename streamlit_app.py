@@ -1,18 +1,31 @@
-import streamlit as st
+from langchain.agents import create_csv_agent
 from langchain.llms import OpenAI
+from dotenv import load_dotenv
+import os
+import streamlit as st
 
-st.title('🦜🔗 Quickstart App')
 
-openai_api_key = st.sidebar.text_input('OpenAI API Key')
+def main():
+    load_dotenv()
 
-def generate_response(input_text):
-  llm = OpenAI(temperature=0.7, openai_api_key=openai_api_key)
-  st.info(llm(input_text))
+    # Load the OpenAI API key from the environment variable
+    if os.getenv("OPENAI_API_KEY") is None or os.getenv("OPENAI_API_KEY") == "":
+        print("OPENAI_API_KEY is not set")
+        exit(1)
+    else:
+        print("OPENAI_API_KEY is set")
 
-with st.form('my_form'):
-  text = st.text_area('Enter text:', 'What are the three key pieces of advice for learning how to code?')
-  submitted = st.form_submit_button('Submit')
-  if not openai_api_key.startswith('sk-'):
-    st.warning('Please enter your OpenAI API key!', icon='⚠')
-  if submitted and openai_api_key.startswith('sk-'):
-    generate_response(text)
+    st.set_page_config(page_title="Ask your CSV")
+    st.header("Ask your CSV 📈")
+
+    csv_file = st.file_uploader("Upload a CSV file", type="csv")
+    if csv_file is not None:
+
+        agent = create_csv_agent(
+            OpenAI(temperature=0), csv_file, verbose=True)
+
+        user_question = st.text_input("Ask a question about your CSV: ")
+
+        if user_question is not None and user_question != "":
+            with st.spinner(text="In progress..."):
+                st.write(agent.run(user_question))
