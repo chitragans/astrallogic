@@ -3,9 +3,8 @@ from langchain import PromptTemplate
 from langchain.llms import OpenAI
 
 prompt = PromptTemplate(
-    #input_variables=["tone", "dialect", "email"],
-    input_variables=["tone", "email"],
-    template=template
+    input_variables=["tone", "dialect", "email"],
+    template=template,
 )
 
 def load_LLM(openai_api_key):
@@ -22,9 +21,16 @@ def get_api_key():
 
 openai_api_key = get_api_key()
 
-option_tone = st.selectbox(
+col1, col2 = st.columns(2)
+with col1:
+    option_tone = st.selectbox(
         'Which tone would you like your email to have?',
         ('Formal', 'Informal'))
+    
+with col2:
+    option_dialect = st.selectbox(
+        'Which English Dialect would you like?',
+        ('American', 'British'))
 
 def get_text():
     input_text = st.text_area(label="Type here", placeholder="Your Email...", key="email_input")
@@ -45,8 +51,8 @@ if email_input:
 
     llm = load_LLM(openai_api_key=openai_api_key)
 
-    prompt_with_email = prompt.format(tone=option_tone, email=email_input)
-    #prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, email=email_input)
+    prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, email=email_input)
+    #prompt_with_email = prompt.format(tone=option_tone, email=email_input)
 
     formatted_email = llm(prompt_with_email)
 
