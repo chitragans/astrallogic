@@ -4,7 +4,7 @@ from langchain.llms import OpenAI
 
 prompt = PromptTemplate(
     #input_variables=["tone", "dialect", "email"],
-    #input_variables=["tone", "email"],
+    input_variables=["tone", "email"],
     template=template,
 )
 
