@@ -7,8 +7,6 @@ template = """
     Your goal is to:
     - Properly format the email
 
-the aisles, I noticed that they were fresh out of biscuits, which was a bit of a disappointment, as I do love a good cuppa with a biscuit or two.
-
     Please start the email with a warm introduction. Add the introduction if you need to.
     
     Below is the email:
