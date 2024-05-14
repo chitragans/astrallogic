@@ -35,18 +35,7 @@ def get_api_key():
     return input_text
 
 openai_api_key = get_api_key()
-""
-col1, col2 = st.columns(2)
-with col1:
-    option_tone = st.selectbox(
-        'Which tone would you like your email to have?',
-        ('Formal', 'Informal'))
-    
-with col2:
-    option_dialect = st.selectbox(
-        'Which English Dialect would you like?',
-        ('American', 'British'))
-""
+
 def get_text():
     input_text = st.text_area(label="Type here", placeholder="Your Email...", key="email_input")
     return input_text
