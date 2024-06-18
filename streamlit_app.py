@@ -11,16 +11,17 @@ client = OpenAI(
 )
 response = client.chat.completions.create(
         model="gpt-4",
-        messages=[{
+        messages=[
+            {
             "role": "system",
             "content": "You are an AI assistant who knows everything.",
             },
-              {
-                  "role": "user",
-                  "content": "Can you tell me a tamil fish curry recipe?"
-              }
-             ],
-    )
+            {
+             "role": "user",
+             "content": "Can you tell me a tamil fish curry recipe?"
+            },
+         ],
+)
 message =response.choices[0].message.content
 st.write(message)
 
