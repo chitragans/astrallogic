@@ -21,8 +21,8 @@ response = client.chat.completions.create(
               }
              ],
     )
-    message =response.choices[0].message.content
-    st.write(message)
+message =response.choices[0].message.content
+st.write(message)
 
 
 #openai_api_key = st.sidebar.text_input('OpenAI API Key')
