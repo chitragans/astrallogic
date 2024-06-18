@@ -11,6 +11,7 @@ client = OpenAI(
     api_key="c45e8e03e070469bbea48b070fd8eaf1" ,
     base_url="https://api.aimlapi.com",
 )
+input_text = st.text_area('Enter your question here:', 'Can you tell me a tamil fish curry recipe?')
 response = client.chat.completions.create(
         model="gpt-4",
         messages=[
@@ -20,7 +21,7 @@ response = client.chat.completions.create(
             },
             {
              "role": "user",
-             "content": "Can you tell me a tamil fish curry recipe?"
+             "content": input_text
             },
          ],
 )
